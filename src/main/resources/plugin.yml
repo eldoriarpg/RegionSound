@@ -3,3 +3,7 @@ authors: [SirYwell, Adwirawien]
 description: Super awesome plugin to play certain sounds in regions
 main: de.eldoria.regionsound.RegionSoundPlugin
 version: 1.0.0
+api-version: "1.13"
+softdepend:
+  - WorldGuard
+  - WorldEdit
