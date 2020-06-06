@@ -1,0 +1,5 @@
+name: RegionSound
+authors: [SirYwell, Adwirawien]
+description: Super awesome plugin to play certain sounds in regions
+main: de.eldoria.regionsound.RegionSoundPlugin
+version: 1.0.0
