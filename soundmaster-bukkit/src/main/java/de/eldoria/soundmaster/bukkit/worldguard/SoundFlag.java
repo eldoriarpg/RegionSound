@@ -1,10 +1,11 @@
-package de.eldoria.regionsound.worldguard;
+package de.eldoria.soundmaster.bukkit.worldguard;
 
 import com.sk89q.worldguard.protection.flags.Flag;
 import com.sk89q.worldguard.protection.flags.FlagContext;
 import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
-import de.eldoria.regionsound.SoundDefinition;
-import de.eldoria.regionsound.util.FlagParseUtil;
+import de.eldoria.soundmaster.api.PlayableSound;
+import de.eldoria.soundmaster.bukkit.sounds.RandomSound;
+import de.eldoria.soundmaster.bukkit.util.FlagParseUtil;
 import org.apache.commons.lang.math.IntRange;
 import org.bukkit.Sound;
 
@@ -12,7 +13,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SoundFlag extends Flag<SoundDefinition> {
+public class SoundFlag extends Flag<PlayableSound<Sound>> {
     private final static String PARAMETER_DELIMITER = ";";
     private final static String SOUND_DELIMITER = ",";
     private final static String FLAG_NAME = "sound";
@@ -23,7 +24,7 @@ public class SoundFlag extends Flag<SoundDefinition> {
     }
 
     @Override
-    public SoundDefinition parseInput(FlagContext flagContext) throws InvalidFlagFormat {
+    public PlayableSound<Sound> parseInput(FlagContext flagContext) throws InvalidFlagFormat {
         List<Sound> sounds = new ArrayList<>();
         String[] splitAll = flagContext.getUserInput().split(PARAMETER_DELIMITER);
         if (splitAll.length == 0) {
@@ -40,17 +41,17 @@ public class SoundFlag extends Flag<SoundDefinition> {
         } else {
             range = new IntRange(1, 20);
         }
-        return new SoundDefinition(sounds, range);
+        return new RandomSound(sounds, range);
     }
 
     // TODO: Finish this
     @Override
-    public SoundDefinition unmarshal(@Nullable Object o) {
+    public PlayableSound<Sound> unmarshal(@Nullable Object o) {
         return null;
     }
 
     @Override
-    public Object marshal(SoundDefinition soundDefinition) {
+    public Object marshal(PlayableSound<Sound> playableSound) {
         return null;
     }
 }

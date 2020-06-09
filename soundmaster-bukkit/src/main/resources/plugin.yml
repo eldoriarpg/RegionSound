@@ -1,0 +1,9 @@
+name: SoundMaster
+authors: [SirYwell, Adwirawien]
+description: SoundMaster adds the ability to play sounds on custom preference.
+main: de.eldoria.soundmaster.bukkit.SoundMasterPlugin
+version: 1.0.0
+api-version: "1.13"
+softdepend:
+  - WorldGuard
+  - WorldEdit

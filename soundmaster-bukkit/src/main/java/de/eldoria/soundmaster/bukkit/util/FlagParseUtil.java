@@ -1,4 +1,4 @@
-package de.eldoria.regionsound.util;
+package de.eldoria.soundmaster.bukkit.util;
 
 import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
 import org.apache.commons.lang.math.IntRange;

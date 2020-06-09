@@ -5,8 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.eldoria</groupId>
-    <artifactId>RegionSound</artifactId>
+    <artifactId>SoundMaster</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-FINAL</version>
+    <modules>
+        <module>soundmaster-bukkit</module>
+        <module>soundmaster-api</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
