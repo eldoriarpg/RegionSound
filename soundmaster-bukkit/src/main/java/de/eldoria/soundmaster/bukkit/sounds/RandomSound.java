@@ -15,6 +15,14 @@ public class RandomSound extends BukkitSound {
         this.durationRange = durationRange;
     }
 
+    public IntRange getDurationRange() {
+        return durationRange;
+    }
+
+    public List<Sound> getSounds() {
+        return sounds;
+    }
+
     @Override
     public float getVolume() {
         return 1f;

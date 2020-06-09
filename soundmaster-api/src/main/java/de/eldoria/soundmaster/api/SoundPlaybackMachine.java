@@ -14,5 +14,5 @@ public interface SoundPlaybackMachine<S> {
         queueRepeatingSound(target, sound, INFINITE);
     }
 
-    void cancelInfiniteSound(SoundTarget<S> target, PlayableSound<S> sound);
+    void cancelSound(SoundTarget<S> target, PlayableSound<S> sound);
 }

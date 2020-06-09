@@ -12,21 +12,45 @@ import org.bukkit.Sound;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
-public class SoundFlag extends Flag<PlayableSound<Sound>> {
+public class SoundFlag extends Flag<RandomSound> {
+    public static final SoundFlag SOUND_FLAG = new SoundFlag();
     private final static String PARAMETER_DELIMITER = ";";
     private final static String SOUND_DELIMITER = ",";
     private final static String FLAG_NAME = "sound";
-    public static final SoundFlag SOUND_FLAG = new SoundFlag();
 
     protected SoundFlag() {
         super(FLAG_NAME);
     }
 
     @Override
-    public PlayableSound<Sound> parseInput(FlagContext flagContext) throws InvalidFlagFormat {
+    public RandomSound parseInput(FlagContext flagContext) throws InvalidFlagFormat {
+        return parse(flagContext.getUserInput());
+    }
+
+    // TODO: Finish this
+    @Override
+    public RandomSound unmarshal(@Nullable Object o) {
+        if (o == null) return null;
+        String s = (String) o;
+        try {
+            return parse(s);
+        } catch (InvalidFlagFormat invalidFlagFormat) {
+            invalidFlagFormat.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Object marshal(RandomSound playableSound) {
+        return join(SOUND_DELIMITER, playableSound.getSounds()) +
+                PARAMETER_DELIMITER + intRangeToString(playableSound.getDurationRange());
+    }
+
+    private RandomSound parse(String input) throws InvalidFlagFormat {
         List<Sound> sounds = new ArrayList<>();
-        String[] splitAll = flagContext.getUserInput().split(PARAMETER_DELIMITER);
+        String[] splitAll = input.split(PARAMETER_DELIMITER);
         if (splitAll.length == 0) {
             throw new InvalidFlagFormat("No sound provided");
         }
@@ -44,14 +68,13 @@ public class SoundFlag extends Flag<PlayableSound<Sound>> {
         return new RandomSound(sounds, range);
     }
 
-    // TODO: Finish this
-    @Override
-    public PlayableSound<Sound> unmarshal(@Nullable Object o) {
-        return null;
+    private static String join(String delimiter, Iterable<Sound> sounds) {
+        StringJoiner joiner = new StringJoiner(delimiter);
+        sounds.forEach(s -> joiner.add(s.name().toLowerCase()));
+        return joiner.toString();
     }
 
-    @Override
-    public Object marshal(PlayableSound<Sound> playableSound) {
-        return null;
+    private static String intRangeToString(IntRange range) {
+        return range.getMinimumInteger() + ".." + range.getMaximumInteger();
     }
 }

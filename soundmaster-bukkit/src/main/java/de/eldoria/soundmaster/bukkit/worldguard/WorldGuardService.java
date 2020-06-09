@@ -8,16 +8,16 @@ import com.sk89q.worldguard.session.SessionManager;
 import de.eldoria.soundmaster.api.SoundMaster;
 import de.eldoria.soundmaster.api.SoundPlaybackProvider;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class WorldGuardService implements SoundPlaybackProvider {
-    private static final Map<String, NamespacedKey> regionKeyCache = new HashMap<>();
+public class WorldGuardService implements SoundPlaybackProvider<Sound> {
     public static SoundFlag SOUND_FLAG_INSTANCE;
 
     @Override
-    public void onLoad(SoundMaster plugin) {
+    public void onLoad(SoundMaster<Sound> plugin) {
         FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
         try {
             // create a flag with the name "my-custom-flag", defaulting to true
@@ -37,13 +37,13 @@ public class WorldGuardService implements SoundPlaybackProvider {
     }
 
     @Override
-    public void onEnable(SoundMaster plugin) {
+    public void onEnable(SoundMaster<Sound> plugin) {
         SessionManager sessionManager = WorldGuard.getInstance().getPlatform().getSessionManager();
         sessionManager.registerHandler(new SoundFlagHandler.Factory(plugin.getSoundPlaybackMachine()), null);
     }
 
     @Override
-    public void onDisable(SoundMaster plugin) {
+    public void onDisable(SoundMaster<Sound> plugin) {
 
     }
 }

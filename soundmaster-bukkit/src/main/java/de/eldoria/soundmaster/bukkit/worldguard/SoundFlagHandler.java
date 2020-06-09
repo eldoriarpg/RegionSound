@@ -8,13 +8,13 @@ import com.sk89q.worldguard.session.MoveType;
 import com.sk89q.worldguard.session.Session;
 import com.sk89q.worldguard.session.handler.FlagValueChangeHandler;
 import com.sk89q.worldguard.session.handler.Handler;
-import de.eldoria.soundmaster.api.PlayableSound;
 import de.eldoria.soundmaster.api.SoundPlaybackMachine;
 import de.eldoria.soundmaster.api.SoundTarget;
 import de.eldoria.soundmaster.bukkit.BukkitPlayer;
+import de.eldoria.soundmaster.bukkit.sounds.RandomSound;
 import org.bukkit.Sound;
 
-public class SoundFlagHandler extends FlagValueChangeHandler<PlayableSound<Sound>> {
+public class SoundFlagHandler extends FlagValueChangeHandler<RandomSound> {
     private final SoundPlaybackMachine<Sound> soundPlaybackMachine;
 
     protected SoundFlagHandler(Session session, SoundPlaybackMachine<Sound> soundPlaybackMachine) {
@@ -23,21 +23,22 @@ public class SoundFlagHandler extends FlagValueChangeHandler<PlayableSound<Sound
     }
 
     @Override
-    protected void onInitialValue(LocalPlayer player, ApplicableRegionSet set, PlayableSound<Sound> value) {
+    protected void onInitialValue(LocalPlayer player, ApplicableRegionSet set, RandomSound value) {
 
     }
 
     @Override
     protected boolean onSetValue(LocalPlayer player, Location from, Location to, ApplicableRegionSet toSet,
-                                 PlayableSound<Sound> currentValue, PlayableSound<Sound> lastValue, MoveType moveType) {
+                                 RandomSound currentValue, RandomSound lastValue, MoveType moveType) {
+        this.soundPlaybackMachine.cancelSound(adapt(player), lastValue);
         this.soundPlaybackMachine.queueInfiniteSound(adapt(player), currentValue);
         return true;
     }
 
     @Override
     protected boolean onAbsentValue(LocalPlayer player, Location from, Location to, ApplicableRegionSet toSet,
-                                    PlayableSound<Sound> lastValue, MoveType moveType) {
-        this.soundPlaybackMachine.cancelInfiniteSound(adapt(player), lastValue);
+                                    RandomSound lastValue, MoveType moveType) {
+        this.soundPlaybackMachine.cancelSound(adapt(player), lastValue);
         return true;
     }
 

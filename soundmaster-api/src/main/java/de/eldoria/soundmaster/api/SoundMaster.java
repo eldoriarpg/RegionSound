@@ -1,6 +1,6 @@
 package de.eldoria.soundmaster.api;
 
-public interface SoundMaster {
+public interface SoundMaster<S> {
 
-    SoundPlaybackMachine getSoundPlaybackMachine();
+    SoundPlaybackMachine<S> getSoundPlaybackMachine();
 }

@@ -1,10 +1,10 @@
 package de.eldoria.soundmaster.api;
 
-public interface SoundPlaybackProvider {
+public interface SoundPlaybackProvider<S> {
 
-    void onLoad(SoundMaster plugin);
+    void onLoad(SoundMaster<S> plugin);
 
-    void onEnable(SoundMaster plugin);
+    void onEnable(SoundMaster<S> plugin);
 
-    void onDisable(SoundMaster plugin);
+    void onDisable(SoundMaster<S> plugin);
 }
