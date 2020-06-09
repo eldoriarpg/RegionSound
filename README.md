@@ -1,6 +1,6 @@
 > Work in progress.
 
-# 🔊 RegionSound
+# 🔊 Sound Master
 
-RegionSound adds the ability to play sounds in certain regions. You can choose the interval as well as the played sounds.
-We plan to implement many region providers, starting with WorldGuard.
+SoundMaster adds the ability to play sounds on custom preference. You can choose the interval as well as the played sounds.
+We plan to implement many region adn event providers, starting with WorldGuard.
